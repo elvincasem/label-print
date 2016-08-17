@@ -68,13 +68,12 @@
                         <li>
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Generate Label</a>
                         </li>
-						<li>
+                        <li>
                             <a href="dynamic_label.php"><i class="fa fa-dashboard fa-fw"></i> Dynamic Label</a>
                         </li>
 						<li>
                             <a href="panel_label.php"><i class="fa fa-dashboard fa-fw"></i> Panel Labels</a>
                         </li>
-                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
