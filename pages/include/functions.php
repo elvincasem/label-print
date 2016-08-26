@@ -33,25 +33,101 @@ function singleSQL($q){
 }
 	
 	
-	//save item
-	if($_POST['action'] == "saveitem"){
+	//save label
+	if($_POST['action'] == "savelabel"){
 
 		$conn = dbConnect();
-		$description = $_POST['description'];
-		$unit = $_POST['unit'];
-		$unitcost = $_POST['unitcost'];
-		$pcperunit = $_POST['pc_per_unit'];
-		$category = $_POST['category'];
-		$supplier = $_POST['supplier'];
-		//return "ok";
+		$labelname = $_POST['labelname'];
+		$labeldesc = $_POST['labeldescription'];
 
-		$sqlinsert = "INSERT INTO items(description,category,unit,pc_per_unit,unitcost,supplierID) VALUES('$description','$category','$unit','$pcperunit',$unitcost,$supplier)";
+		$sqlinsert = "INSERT INTO panel_label(labelname,labeldescription) VALUES('$labelname','$labeldesc')";
 		$save = $conn->prepare($sqlinsert);
 		$save->execute();
-		
+		echo "Label Saved!";
 		$conn = null;
 
 	}
+	
+	//delete label
+	if($_POST['action'] == "deletelabel"){
+		$conn = dbConnect();
+		$labelid = $_POST['labelid'];
+		$sqldelete = "DELETE FROM panel_label where labelid=$labelid";
+		//echo $sqldelete;
+		$delete = $conn->prepare($sqldelete);
+		$delete->execute();
+		echo "Label Deleted!";
+		$conn = null;
+
+	}
+	
+	//get single label
+	if($_POST['action'] == "getlabel"){
+
+		$conn = dbConnect();
+		$labelid = $_POST['labelid'];
+		$sqlselect = "SELECT * FROM panel_label where labelid=$labelid";
+		$stmt = $conn->prepare($sqlselect);
+		$stmt->execute();
+		$rows = $stmt->fetchAll();
+		//print_r($rows[0]);
+		echo json_encode($rows[0]);
+		//echo $sqlselect;
+		$conn = null;
+	}
+	
+	//update label
+	if($_POST['action'] == "updatelabel"){
+
+		$conn = dbConnect();
+		$labelid = $_POST['labelid'];
+		$labelname = $_POST['labelname'];
+		$labeldescription = $_POST['labeldescription'];
+		$sqlupdate = "UPDATE panel_label set labelname = '$labelname', labeldescription = '$labeldescription' where labelid=$labelid";
+		echo $sqlupdate;
+		$update = $conn->prepare($sqlupdate);
+		$update->execute();
+		$conn = null;
+		echo "Updated";
+	}
+	
+	//get all labels
+	if($_POST['action'] == "getalllabels"){
+
+		$conn = dbConnect();
+		$itemno = $_POST['itemno'];
+		$sqlselect = "SELECT * from panel_label";
+		$stmt = $conn->prepare($sqlselect);
+		$stmt->execute();
+		$rows = $stmt->fetchAll();
+		//print_r($rows[0]);
+		echo json_encode($rows);
+		
+		$conn = null;
+	}
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//delete item
 	if($_POST['action'] == "deleteitem"){
@@ -64,23 +140,7 @@ function singleSQL($q){
 
 	}
 	
-	//update item
-	if($_POST['action'] == "updateitem"){
-
-		$conn = dbConnect();
-		$itemno = $_POST['itemno'];
-		$desc = $_POST['description'];
-		$pcperunit = $_POST['pc_per_unit'];
-		$unit = $_POST['unit'];
-		$cost = $_POST['unitcost'];
-		$category = $_POST['category'];
-		$supplier = $_POST['supplier'];
-		$sqlupdate = "UPDATE items set description = '$desc', unit = '$unit',pc_per_unit = '$pcperunit', unitCost = $cost, category='$category', supplierID =$supplier where itemNo=$itemno";
-		echo $sqlupdate;
-		$update = $conn->prepare($sqlupdate);
-		$update->execute();
-		$conn = null;
-	}
+	
 	
 	//get single item
 	if($_POST['action'] == "getitem"){
@@ -435,5 +495,7 @@ function singleSQL($q){
 	$GLOBALS['currentuser_name'] ="elvin";
 	
 	/**********end**********/
+	
+	
 	
 ?>

@@ -66,10 +66,7 @@
                         
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Generate Label</a>
-                        </li>
-                        <li>
-                            <a href="dynamic_label.php"><i class="fa fa-dashboard fa-fw"></i> Dynamic Label</a>
+                            <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Generate Label</a>
                         </li>
 						<li>
                             <a href="panel_label.php"><i class="fa fa-dashboard fa-fw"></i> Panel Labels</a>
@@ -95,11 +92,11 @@
 							   
 						<form role="form" id="form_item"> 
 							<div class="form-group">
-								<input type="hidden" id="labelid" value="">
+								
 								<label>Label Name</label>
-								<input id="labelname" class="form-control" value="" tabindex="1">
+								<input id="labelname" class="form-control" value="" tabindex="0" autofocus>
 								<label>Label Description</label>
-								<input id="labeldescription" class="form-control" value="" tabindex="2">                                  
+								<input id="labeldescription" class="form-control" value="" tabindex="0"> <input type="hidden" id="labelid" value="">                                 
 							</div>
 							
 						</form>
@@ -122,10 +119,16 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"></h1>
+                    
+							<div class="pull-right" style="padding:10px">
+								<button id="addpanelbutton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addPanel">
+									<i class="fa fa-plus-circle"></i> Add Panel
+								</button>
+                            </div>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+			
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
@@ -159,7 +162,7 @@
 							echo "<td class='center'> 
 								
 								<button class='btn btn-success' onClick='editlabel($labelid)'  data-toggle='modal' data-target='#addPanel'><i class='fa fa-edit'></i></button>
-								<button class='btn btn-danger notification' id='notification' onClick='deleteuser($uid)'><i class='fa fa-times'></i></button>
+								<button class='btn btn-danger notification' id='notification' onClick='deletelabel($labelid)'><i class='fa fa-times'></i></button>
 							</td>";
 							echo "</tr>";
 						}
@@ -221,16 +224,113 @@
 			});
 		});
 		
+		$('#addpanelbutton').click(function(){
+			document.getElementById("labelid").value = "";
+			document.getElementById("labelname").value = "";
+			document.getElementById("labeldescription").value = "";
+			$('#savelabel').prop("disabled", false);    
+			$('#updatelabel').prop("disabled", true);  
+			document.getElementById("labelname").attr += " autofocus";
+			//document.getElementById("labelname").value = "t";
+			console.log("focus");
+			//$("#labelname").focus();
+			
+		});
 		
 		function editlabel(panelid){
 			$('#savelabel').prop("disabled", true);    
 			$('#updatelabel').prop("disabled", false);  
-			alert(panelid);
+			//var labelname = document.getElementById("labelname").value;
+			//var labeldescription = document.getElementById("labeldescription").value;
+			$.ajax({
+					url: 'include/functions.php',
+					type: 'post',
+					data: {action: "getlabel", labelid : panelid},
+					success: function(response) {
+						console.log(response);
+						var data = JSON.parse(response);
+						document.getElementById("labelid").value = panelid;
+						document.getElementById("labelname").value = data.labelname;
+						document.getElementById("labeldescription").value = data.labeldescription;
+						
+					
+						
+					}
+				});
+		}
+		
+		function deletelabel(panelid){
+			//alert(panelid);
+			var r = confirm("Are your sure you want to delete this Label?");
+				if (r == true) {
+					
+					$.ajax({
+								url: 'include/functions.php',
+								type: 'post',
+								data: {action: "deletelabel", labelid: panelid},
+								success: function(response) {
+									console.log(response);
+									location.reload();
+								}
+							});
+					
+				} if(r == false) {
+					//txt = "You pressed Cancel!";
+					
+				}
 		}
 		
 		
 		$('#savelabel').click(function(){
-			alert("saved");
+			//alert("saved");
+			var labelname = document.getElementById("labelname").value;
+			var labeldescription = document.getElementById("labeldescription").value;
+			
+			
+			
+			$.ajax({
+					url: 'include/functions.php',
+					type: 'post',
+					data: {action: "savelabel", labelname : labelname, labeldescription:labeldescription},
+					success: function(response) {
+						console.log(response);
+					/*	var data = JSON.parse(response);
+						document.getElementById("supplierid").value = id;
+						document.getElementById("suppliername").value = data.supName;
+						document.getElementById("address").value = data.address;
+						document.getElementById("contactno").value = data.contactNo;
+						return "valid";*/
+						$( ".simplemodal-close" ).trigger( "click" );
+						location.reload();
+						//setTimeout(function(){location.reload();},1000);
+					}
+				});
+			
+			
+			
+		});
+		
+		
+		$('#updatelabel').click(function(){
+			//alert("saved");
+			var labelid = document.getElementById("labelid").value;
+			var labelname = document.getElementById("labelname").value;
+			var labeldescription = document.getElementById("labeldescription").value;
+
+			$.ajax({
+					url: 'include/functions.php',
+					type: 'post',
+					data: {action: "updatelabel", labelid:labelid, labelname : labelname, labeldescription:labeldescription},
+					success: function(response) {
+						console.log(response);
+					
+						$( ".simplemodal-close" ).trigger( "click" );
+						location.reload();
+					}
+				});
+			
+			
+			
 		});
 		
 			
