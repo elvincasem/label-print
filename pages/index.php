@@ -290,6 +290,18 @@
 				if (document.getElementById("structure_labels").checked==true){
 					var structure_copies = document.getElementById("structure_copies").value;
 					panellabels += "&structurelabels="+structure_copies;
+					
+					var projname = document.getElementById("project_name").value;
+				var projnamecontinued = document.getElementById("project_name_continued").value;
+				var projnumber = document.getElementById("project_number").value;
+				var startinglabel = document.getElementById("starting_label").value;
+				var endinglabel = document.getElementById("ending_label").value;
+				
+				window.open('pdf/print-grid.php?projname='+projname+'&projnamecontinued='+projnamecontinued+'&projnumber='+projnumber+'&start='+startinglabel+'&end='+endinglabel+panellabels);
+					
+					
+					
+					
 				}else{
 					
 					
@@ -300,7 +312,7 @@
 						type: 'post',
 						data: {action: "getalllabels"},
 						success: function(response) {
-							console.log(response);
+							//console.log(response);
 							var data = JSON.parse(response);
 							var divlabelid ="";
 							for(var i=0; i<data.length; i++){
@@ -317,7 +329,17 @@
 								
 								
 							}
-							alert(panellabels);
+							
+							var projname = document.getElementById("project_name").value;
+				var projnamecontinued = document.getElementById("project_name_continued").value;
+				var projnumber = document.getElementById("project_number").value;
+				var startinglabel = document.getElementById("starting_label").value;
+				var endinglabel = document.getElementById("ending_label").value;
+				
+				window.open('pdf/print-grid.php?projname='+projname+'&projnamecontinued='+projnamecontinued+'&projnumber='+projnumber+'&start='+startinglabel+'&end='+endinglabel+panellabels);
+							
+							
+							//alert(panellabels);
 							//alert(data.length);
 							//alert(data);​
 							//document.getElementById("labelid").value = panelid;
@@ -328,26 +350,15 @@
 							
 						}
 					});
-					console.log(panellabels);
+					//console.log(panellabels);
 					
 					
 					
 				
 				}
 			
-			
-				
-				
-				
 
 				
-				var projname = document.getElementById("project_name").value;
-				var projnamecontinued = document.getElementById("project_name_continued").value;
-				var projnumber = document.getElementById("project_number").value;
-				var startinglabel = document.getElementById("starting_label").value;
-				var endinglabel = document.getElementById("ending_label").value;
-				
-				//window.open('pdf/print-grid.php?projname='+projname+'&projnamecontinued='+projnamecontinued+'&projnumber='+projnumber+'&start='+startinglabel+'&end='+endinglabel+panellabels);
 				
 			}
 		

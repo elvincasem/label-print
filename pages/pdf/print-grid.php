@@ -112,86 +112,29 @@ if($GLOBALS['structurecopies']!=""){
 		
 }else{
 	
-	if($_GET['labela']=="1"){
-		$GLOBALS['label_letter']="A-";
-		$GLOBALS['pages']=$start;
-		for($pages=$start;$pages<=$end;$pages++){
-		$pdf->grid = true;
-		$pdf->AddPage();
-		$GLOBALS['pages']=$pages;
+	
+	include('../include/db_connection.php');
+	$q = "SELECT * FROM panel_label";
+	$conn = dbConnect();
+	$stmt = $conn->prepare($q);
+	$stmt->execute();
+	$rows = $stmt->fetchAll();
+	$userlist = $rows;
+	
+	$record_no = 0;
+	foreach ($userlist as $rows => $link) {
+		$labelid = $userlist[$record_no]['labelid'];
+		$labelget = "label_".$labelid;
+		if($_GET[$labelget]=="1"){
+			$GLOBALS['label_letter']=$userlist[$record_no]['labelname']."-";
+			$GLOBALS['pages']=$start;
+			for($pages=$start;$pages<=$end;$pages++){
+			$pdf->grid = true;
+			$pdf->AddPage();
+			$GLOBALS['pages']=$pages;
+			}
 		}
-	}
-	if($_GET['labelb']=="1"){
-		$GLOBALS['label_letter']="B-";
-		$GLOBALS['pages']=$start;
-		for($pages=$start;$pages<=$end;$pages++){
-		$pdf->grid = true;
-		$pdf->AddPage();
-		$GLOBALS['pages']=$pages;
-		}
-	}
-	if($_GET['labelb1']=="1"){
-		$GLOBALS['label_letter']="B1-";
-		$GLOBALS['pages']=$start;
-		for($pages=$start;$pages<=$end;$pages++){
-		$pdf->grid = true;
-		$pdf->AddPage();
-		$GLOBALS['pages']=$pages;
-		}
-	}
-	if($_GET['labelb2']=="1"){
-		$GLOBALS['label_letter']="B2-";
-		$GLOBALS['pages']=$start;
-		for($pages=$start;$pages<=$end;$pages++){
-		$pdf->grid = true;
-		$pdf->AddPage();
-		$GLOBALS['pages']=$pages;
-		}
-	}
-	if($_GET['labelc']=="1"){
-		$GLOBALS['label_letter']="C-";
-		$GLOBALS['pages']=$start;
-		for($pages=$start;$pages<=$end;$pages++){
-		$pdf->grid = true;
-		$pdf->AddPage();
-		$GLOBALS['pages']=$pages;
-		}
-	}
-	if($_GET['labeld']=="1"){
-		$GLOBALS['label_letter']="D-";
-		$GLOBALS['pages']=$start;
-		for($pages=$start;$pages<=$end;$pages++){
-		$pdf->grid = true;
-		$pdf->AddPage();
-		$GLOBALS['pages']=$pages;
-		}
-	}
-	if($_GET['labele']=="1"){
-		$GLOBALS['label_letter']="E-";
-		$GLOBALS['pages']=$start;
-		for($pages=$start;$pages<=$end;$pages++){
-		$pdf->grid = true;
-		$pdf->AddPage();
-		$GLOBALS['pages']=$pages;
-		}
-	}
-	if($_GET['labelf']=="1"){
-		$GLOBALS['label_letter']="F-";
-		$GLOBALS['pages']=$start;
-		for($pages=$start;$pages<=$end;$pages++){
-		$pdf->grid = true;
-		$pdf->AddPage();
-		$GLOBALS['pages']=$pages;
-		}
-	}
-	if($_GET['labelg']=="1"){
-		$GLOBALS['label_letter']="G-";
-		$GLOBALS['pages']=$start;
-		for($pages=$start;$pages<=$end;$pages++){
-		$pdf->grid = true;
-		$pdf->AddPage();
-		$GLOBALS['pages']=$pages;
-		}
+	$record_no++;	
 	}
 	
 	
