@@ -282,7 +282,7 @@
 	
 	
 		<script type="text/javascript">
-		
+			
 			function printpdf(){
 			
 			var panellabels = "";
@@ -302,9 +302,22 @@
 						success: function(response) {
 							console.log(response);
 							var data = JSON.parse(response);
+							var divlabelid ="";
 							for(var i=0; i<data.length; i++){
-								alert(data[i].labelname);
+								//alert(data[i].labelname);
+								divlabelid = "label_"+data[i].labelid;
+								//console.log(divlabelid);
+								if (document.getElementById(divlabelid).checked==true){
+										panellabels += "&"+divlabelid+"=1";
+													
+									}else{
+										
+										panellabels += "&"+divlabelid+"=0";
+									}
+								
+								
 							}
+							alert(panellabels);
 							//alert(data.length);
 							//alert(data);​
 							//document.getElementById("labelid").value = panelid;
@@ -315,42 +328,10 @@
 							
 						}
 					});
+					console.log(panellabels);
 					
 					
 					
-					
-					
-					/*
-				
-					if (document.getElementById("labela").checked==true){
-					panellabels += "&labela=1";
-					}
-					if (document.getElementById("labelb").checked==true){
-						panellabels += "&labelb=1";
-					}
-					if (document.getElementById("labelb1").checked==true){
-						panellabels += "&labelb1=1";
-					}
-					if (document.getElementById("labelb2").checked==true){
-						panellabels += "&labelb2=1";
-					}
-					if (document.getElementById("labelc").checked==true){
-						panellabels += "&labelc=1";
-					}
-					if (document.getElementById("labeld").checked==true){
-						panellabels += "&labeld=1";
-					}
-					if (document.getElementById("labele").checked==true){
-						panellabels += "&labele=1";
-					}
-					if (document.getElementById("labelf").checked==true){
-						panellabels += "&labelf=1";
-					}
-					if (document.getElementById("labelg").checked==true){
-						panellabels += "&labelg=1";
-					}
-				*/
-				
 				
 				}
 			
@@ -358,7 +339,7 @@
 				
 				
 				
-				//alert(panellabels);
+
 				
 				var projname = document.getElementById("project_name").value;
 				var projnamecontinued = document.getElementById("project_name_continued").value;
