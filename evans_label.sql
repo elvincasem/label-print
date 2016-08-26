@@ -21,11 +21,11 @@ CREATE TABLE `panel_label` (
   `labelname` varchar(100) DEFAULT NULL,
   `labeldescription` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`labelid`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 /*Data for the table `panel_label` */
 
-insert  into `panel_label`(`labelid`,`labelname`,`labeldescription`) values (1,'A','Rear Baseboard'),(2,'B','Back Panel'),(3,'C','Top Panel'),(4,'D','Worksurface'),(5,'E','Front Panel'),(6,'F','Front Baseboard'),(7,'G','Equipment Front');
+insert  into `panel_label`(`labelid`,`labelname`,`labeldescription`) values (1,'A','Rear Baseboard'),(2,'B','Back Panel'),(3,'C','Top Panel'),(4,'D','Worksurface'),(5,'E','Front Panel'),(6,'F','Front Baseboard'),(7,'G','Equipment Front'),(14,'H','Newly Added');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
