@@ -121,6 +121,16 @@
                                             <input id="ending_label" class="form-control">
                                             
                             </div>
+							<div class="form-group">
+                                            <label>Option Text 1</label>
+                                            <input id="option_1" class="form-control">
+                                            
+                            </div>
+							<div class="form-group">
+                                            <label>Option Text 2</label>
+                                            <input id="option_2" class="form-control">
+                                            
+                            </div>
 							
 							
 							
@@ -246,8 +256,8 @@
 								<div class="preview-body project_name" id="project_name_label">Project Name</div>
 								<div class="preview-body project_number" id="project_number_label">Project Number</div>
 								<br>
-								<div class="preview-body"><strong>Evans Consoles Corporation</strong></div>
-								<div class="preview-body"><strong><i>Made In Canada</i></strong></div>
+								<div class="preview-body" id="option_text_1"><strong>Option Text 1</strong></div>
+								<div class="preview-body" id="option_text_2"><strong><i>Option Text 2</i></strong></div>
 								
 							
 							</div>
@@ -335,8 +345,10 @@
 				var projnumber = document.getElementById("project_number").value;
 				var startinglabel = document.getElementById("starting_label").value;
 				var endinglabel = document.getElementById("ending_label").value;
+				var option1 = document.getElementById("option_1").value;
+				var option2 = document.getElementById("option_2").value;
 				
-				window.open('pdf/print-grid.php?projname='+projname+'&projnamecontinued='+projnamecontinued+'&projnumber='+projnumber+'&start='+startinglabel+'&end='+endinglabel+panellabels);
+				window.open('pdf/print-grid.php?projname='+projname+'&projnamecontinued='+projnamecontinued+'&projnumber='+projnumber+'&start='+startinglabel+'&end='+endinglabel+'&option1='+option1+'&option2='+option2+panellabels);
 							
 							
 							//alert(panellabels);
@@ -374,11 +386,15 @@
 				var projnumber = document.getElementById("project_number").value;
 				var startinglabel = document.getElementById("starting_label").value;
 				var endinglabel = document.getElementById("ending_label").value;
+				var option1 = document.getElementById("option_1").value;
+				var option2 = document.getElementById("option_2").value;
 				
 				var projectsequence = projnumber + "-" + "A-" + startinglabel;
 				
 				document.getElementById("project_name_label").innerHTML = projname + "<br />" + projnamecontinued;
 				document.getElementById("project_number_label").innerHTML = projectsequence;
+				document.getElementById("option_text_1").innerHTML = option1;
+				document.getElementById("option_text_2").innerHTML = option2;
 			}
 		
 		

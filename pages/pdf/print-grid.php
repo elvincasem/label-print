@@ -12,6 +12,8 @@ $GLOBALS['start'] = $_GET['start'];
 $GLOBALS['end'] = $_GET['end'];
 $GLOBALS['pages'] = 0;
 $GLOBALS['structurecopies'] = $_GET['structurelabels'];
+$GLOBALS['option1'] = $_GET['option1'];
+$GLOBALS['option2'] = $_GET['option2'];
 
 
 require('fpdf.php');
@@ -67,10 +69,12 @@ class PDF_Grid extends FPDF {
 			//footer
 			$this->SetX($this->lMargin);
 			 $this->SetFont('Times','B',10);
-			$this->Cell(0,19,'Evans Consoles Corporation',0,0,'C');
+			 $option1 = $GLOBALS['option1'];
+			 $option2 = $GLOBALS['option2'];
+			$this->Cell(0,19,$option1,0,0,'C');
 			$this->SetX($this->lMargin);
 			$this->SetFont('Times','I',8);
-			$this->Cell(0,25,'Made In Canada',0,0,'C');
+			$this->Cell(0,25,$option2,0,0,'C');
 			//$this->Write(4,"Some text Here2");
 			
 			
