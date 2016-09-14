@@ -13,7 +13,7 @@ $GLOBALS['end'] = $_GET['end'];
 $GLOBALS['pages'] = 0;
 $GLOBALS['structurecopies'] = $_GET['structurelabels'];
 $GLOBALS['option1'] = $_GET['option1'];
-$GLOBALS['option2'] = $_GET['option2'];
+//$GLOBALS['option2'] = $_GET['option2'];
 
 
 require('fpdf.php');
@@ -70,11 +70,11 @@ class PDF_Grid extends FPDF {
 			$this->SetX($this->lMargin);
 			 $this->SetFont('Times','B',10);
 			 $option1 = $GLOBALS['option1'];
-			 $option2 = $GLOBALS['option2'];
+			 //$option2 = $GLOBALS['option2'];
 			$this->Cell(0,19,$option1,0,0,'C');
 			$this->SetX($this->lMargin);
-			$this->SetFont('Times','I',8);
-			$this->Cell(0,25,$option2,0,0,'C');
+			$this->SetFont('Times','',7);
+			$this->Cell(0,25,'Made In Canada',0,0,'C');
 			//$this->Write(4,"Some text Here2");
 			
 			
